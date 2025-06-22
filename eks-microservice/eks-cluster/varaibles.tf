@@ -6,8 +6,3 @@ variable "cluster_name" {
   default = "eks-demo"
 }
 
-variable "vpc_id" {}
-variable "subnet_ids" {
-  type = list(string)
-}
-

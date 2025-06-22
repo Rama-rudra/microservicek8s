@@ -1,3 +1,9 @@
+terraform {
+  backend "local" {
+    path = "../state/app.tfstate"
+  }
+}
+
 provider "kubernetes" {
   config_path = "~/.kube/config"
 }
