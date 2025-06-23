@@ -1,3 +1,9 @@
+terraform {
+  backend "local" {
+    path = "../state/vpc.tfstate"
+  }
+}
+
 provider "aws" {
   region = var.region
 }
@@ -21,7 +27,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_subnet" "public_subnet" {
-  count             = 2
+  count             = 4
   vpc_id            = aws_vpc.eks_vpc.id
   cidr_block        = cidrsubnet(aws_vpc.eks_vpc.cidr_block, 8, count.index)
   map_public_ip_on_launch = true
@@ -53,8 +59,4 @@ resource "aws_route_table_association" "public_assoc" {
   route_table_id = aws_route_table.public.id
 }
 
-terraform {
-  backend "local" {
-    path = "../state/vpc.tfstate"
-  }
-}
+

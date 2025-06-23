@@ -10,7 +10,7 @@ provider "kubernetes" {
 
 resource "kubernetes_namespace" "demo" {
   metadata {
-    name = "demo"
+    name = "demo-1"
   }
 }
 
@@ -24,13 +24,13 @@ resource "kubernetes_deployment" "app" {
     replicas = 2
     selector {
       match_labels = {
-        app = "demo"
+        app = "demo-1"
       }
     }
     template {
       metadata {
         labels = {
-          app = "demo"
+          app = "demo-1"
         }
       }
       spec {
@@ -54,7 +54,7 @@ resource "kubernetes_service" "app_service" {
 
   spec {
     selector = {
-      app = "demo"
+      app = "demo-1"
     }
     port {
       port        = 80
